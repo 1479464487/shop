@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<button id=""></button>
+	<script>
+
+		// expires=null 可选参数
+		// 设置cookie
+			// 1、设置cookie
+			// 2、删除cookie  expires = 负数
+		function setCookie(name,value,expires=null) {
+			if(!expires) {
+				var d = new Date();
+				d.setTime(d.getTime() + expires);
+				// 转换字符串格式时间
+				expires = d.toGMTString();
+			}		
+			document.cookie = name+"="+ value +";expires =" + expires+"; path=/";
+		}
+
+		// 读取cookie
+		setCookie("id","123");
+		setCookie("name","zhangsan");
+		setCookie("age","18");
+		console.log(document.cookie);
+		
+
+		function getCookie(name) {
+			var str = document.cookie;
+			var reg = /[a-zA-Z\d]+=[a-zA-Z\d]+/g;
+			var arr = str.match(reg);
+			if(!arr) {
+				return false;
+			}
+			for(var i = 0;i < arr.length;i++) {
+				var keyValue = arr.split("=");
+				if(name == keyValue[0]) {
+					return keyValue[1];
+				}
+			}
+			return false;
+		}
+		console.log(getCookie("name"));
+	</script>	
+</body>
+</html>
